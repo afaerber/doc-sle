@@ -27,8 +27,29 @@
  </info>
 <?suse-quickstart color="suse"?>
  <sect1>
-  <title>TBD</title>
-
+  <title>The Terminology</title>
+  <para>
+   Although handled similarly in &productname;, modules and extensions are
+   different:
+  </para>
+  <variablelist>
+   <varlistentry>
+    <term>Modules</term>
+    <listitem>
+     <para>
+      Modules are components which allow you to shape the product according to your needs. They are free of charge.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term>Extensions</term>
+    <listitem>
+     <para>
+      Extensions add functionality to your product. They are offered as subscriptions and require a registration key that is liable for costs.
+     </para>
+    </listitem>
+   </varlistentry>
+  </variablelist>
   <para>
    TBD
   </para>
