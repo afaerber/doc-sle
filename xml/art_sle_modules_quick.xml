@@ -8,7 +8,7 @@
     %entities;
 ]>
 
-<article xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="art.sle.modules" xml:lang="en">
+<article xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0" xml:id="art.modules" xml:lang="en">
 <?suse-quickstart color="suse"?>
  <title>Modules &amp; Extensions Quick Start</title>
  <subtitle>&productname; &productnumber;</subtitle>
@@ -26,18 +26,50 @@
   </dm:docmanager>
  </info>
 <?suse-quickstart color="suse"?>
- <sect1>
-  <title>The Terminology</title>
+ <sect1 xml:id="sec.modules.what">
+  <title>Modules &amp; Extensions Explained</title>
   <para>
-   Although handled similarly in &productname;, modules and extensions are
-   different:
+   Starting with &productname; 15, the installation medium only consists of the
+   &leanos;, a minimal, command line-based system for installing, updating and
+   registering &productname;. During the installation you can add functionality
+   by selecting modules and extensions to be installed on top of the &leanos;.
+  </para>
+  <para>
+   Technically modules and extensions are handled similarly, they differ
+   fundamentally:
   </para>
   <variablelist>
    <varlistentry>
     <term>Modules</term>
     <listitem>
      <para>
-      Modules are components which allow you to shape the product according to your needs. They are free of charge.
+      Modules are components which allow you to shape the product according to
+      your needs. ach module has a clearly defined scope ranging from tools for
+      Web Development and Scripting, through a Public Cloud, all the way to the
+      SUSE Package Hub, offering community-managed packages. They give you the
+      ability to provide just the set of packages that is required for the
+      machine's purpose, making the system lean, fast, and more secure. This
+      modular approach also makes it easy to provide tailor-made images for
+      container and cloud environments.
+     </para>
+     <para>
+      Technically, each module adds a set of online repositories (main, update,
+      source, debug) containing packages serving a special purpose, for example
+      providing development tools. In addition to that, modules may add
+      partitioning proposals and system roles which can be chosen during the
+      installation.  They can be added or removed at any time
+      during the life cycle of the system, allowing you to easily adjust the
+      system to changing requirements. &yast; or the command line tool
+      <command>SUSEConnect</command> provide management tools for modules.
+     </para>
+     <para>
+      Modules are part of your &productname; subscription and therefore free of
+      charge. They differ from the base of SUSE Linux Enterprise Server only by
+      their life cycle. With the exception of the SUSE Package Hub module,
+      &suse; provides L3 support for almost all packages rovided by modules
+      (refer to the <link
+      xlink:href="https://www.suse.com/releasenotes/x86_64/SUSE-SLES/15/#Intro.Support">Release
+      Notes</link>.
      </para>
     </listitem>
    </varlistentry>
@@ -45,14 +77,576 @@
     <term>Extensions</term>
     <listitem>
      <para>
-      Extensions add functionality to your product. They are offered as subscriptions and require a registration key that is liable for costs.
+      Extensions provide advanced capabilities for tasks such as real time
+      computing and high availability clustering to &productname;. They are
+      offered as subscriptions and require a registration key that is liable
+      for costs. Usually, extensions have their own release notes documents that
+      are available from <link
+      xlink:href="https://www.suse.com/releasenotes"/>.^
      </para>
     </listitem>
    </varlistentry>
   </variablelist>
-  <para>
-   TBD
-  </para>
+
+  <sect2 xml:id="sec.modules.what">
+   <title>Modules Available for the &sle; Product Family</title>
+   <para>
+    The following modules are available within the &sle; Product Family. Note
+    that the availability of modules depends on the product (refer to the
+    column <emphasis>Availability</emphasis>).
+   </para>
+    <informaltable>
+     <tgroup cols="4">
+      <colspec colnum="1" colname="name" colwidth="40*"/>
+      <colspec colnum="2" colname="dependency" colwidth="20*"/>
+      <colspec colnum="3" colname="availability" colwidth="25*"/>
+      <colspec colnum="4" colname="support" colwidth="27*"/>
+      <thead>
+       <row>
+        <entry>
+         <para>
+          Name and Content
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Module Dependency
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Availability
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Support
+         </para>
+        </entry>
+       </row>
+      </thead>
+      <tbody>
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">Basesystem</emphasis>
+         </para>
+         <para>
+          SLE base system
+         </para>
+        </entry>
+        <entry>
+         <para>
+          None
+         </para>
+        </entry>
+        <entry>
+         <para>
+          default on all products
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> 10 years
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis> 3 years of
+           LTSS<superscript>2</superscript>
+         </member>
+         <member>
+          <emphasis role="bold">support level:</emphasis> L3
+         </member>
+         </simplelist>
+        </entry>
+       </row>
+<!-- Certifications Module is marked as Post-GA - sknorr, 2017-10-20 -->
+<!-- <row>
+        <entry>
+         <para><emphasis role="bold">Certifications</emphasis></para>
+         <para>FIPS 140-2 certification-specific packages</para>
+        </entry>
+        <entry><para>Base System</para></entry>
+        <entry><para>FIXME</para></entry>
+        <entry><para>FIXME</para></entry>
+       </row> -->
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">Containers</emphasis>
+         </para>
+         <para>
+          Docker, tools, prepackaged images
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Basesystem
+         </para>
+        </entry>
+        <entry>
+         <para>
+          SLES, SLES for SAP, SLE HPC
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> 10 years
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis> no
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis> L3
+          </member>
+         </simplelist>
+        </entry>
+       </row>
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">Desktop Applications</emphasis>
+         </para>
+         <para>
+          Basic desktop functionality
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Basesystem
+         </para>
+        </entry>
+        <entry>
+         <para>
+          SLED (default), SLE-WE (default), SLES, SLES for SAP, SLE
+          RT, SLE HPC
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> 10 years
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis> no
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis> L3
+          </member>
+         </simplelist>
+        </entry>
+       </row>
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">Development Tools</emphasis>
+         </para>
+         <para>
+          Helps in developing applications, replaces the SLE SDK
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Basesystem, Desktop Applications
+         </para>
+        </entry>
+        <entry>
+         <para>
+          SLES, SLES for SAP, SLED, SLE RT, SLE HPC
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> 10 years
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis> 3 years of
+           LTSS<superscript>2</superscript>
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis> L3
+          </member>
+         </simplelist>
+        </entry>
+       </row>
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">High Availability</emphasis>
+         </para>
+         <para>
+          <remark condition="clarity">
+           2018-06-06 - fs: Is this really a module?
+          </remark>
+          HA tools such as Hawk, crm, Pacemaker, Corosync
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Basesystem
+         </para>
+        </entry>
+        <entry>
+         <para>
+          <remark condition="clarity">
+           2018-06-06 - fs: Products are missing
+          </remark>
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> 10 years
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis> 3 years of
+           LTSS<superscript>2</superscript>
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis> L3
+          </member>
+         </simplelist>
+        </entry>
+       </row>
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">High Performance Computing</emphasis>
+         </para>
+         <para>
+          Tools and libraries related to High Performance Computing (HPC)
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Basesystem
+         </para>
+        </entry>
+        <entry>
+         <para>
+          SLE HPC
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> 10 years
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis> 3 years of
+           LTSS<superscript>2</superscript>, 12 months of
+           ESPOS<superscript>1</superscript>
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis> L3
+          </member>
+         </simplelist>
+        </entry>
+       </row>
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">Legacy</emphasis>
+         </para>
+         <para>
+          Packages for migration purposes with limited support timeframe
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Basesystem, Server Applications
+         </para>
+        </entry>
+        <entry>
+         <para>
+          <remark condition="clarity">
+           2018-06-06 - fs: Products are missing
+          </remark>
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> ??? <remark
+           condition="clarity">2018-06-06 - fs: missing</remark>
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis>  ??? <remark
+           condition="clarity">2018-06-06 - fs: missing</remark>
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis>  ??? <remark
+           condition="clarity">2018-06-06 - fs: missing</remark>
+          </member>
+         </simplelist>
+        </entry>
+       </row>
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">Public Cloud</emphasis>
+         </para>
+         <para>
+          Public cloud initialization code and tools
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Basesystem, Server Applications
+         </para>
+        </entry>
+        <entry>
+         <para>
+          SLES, SLES for SAP, SLE HPC
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> ??? <remark
+           condition="clarity">2018-06-06 - fs: missing</remark>
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis>  ??? <remark
+           condition="clarity">2018-06-06 - fs: missing</remark>
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis> L3
+          </member>
+         </simplelist>
+        </entry>
+       </row>
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">SAP Applications</emphasis>
+         </para>
+         <para>
+          Packages specific to SLES for SAP
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Basesystem
+         </para>
+        </entry>
+        <entry>
+         <para>
+          SLES for SAP (default)
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> 10 years
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis> 3 years of
+           LTSS<superscript>2</superscript>, 12 months of
+           ESPOS<superscript>1</superscript>
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis> L3
+          </member>
+         </simplelist>
+        </entry>
+       </row>
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">Server Applications</emphasis>
+         </para>
+         <para>
+          Web server, NVDIMM support, OFED
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Basesystem
+         </para>
+        </entry>
+        <entry>
+         <para>
+          SLES (default), SLES for SAP, SLE RT, SLE HPC
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> 10 years
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis> 3 years of LTSS
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis> L3
+          </member>
+         </simplelist>
+        </entry>
+       </row>
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">SUSE Cloud Application Platform Tools</emphasis>
+         </para>
+         <para>
+          Tools for interacting with a &suse; Cloud Application Platform product
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Basesystem
+         </para>
+        </entry>
+        <entry>
+         <para>
+          <remark condition="clarity">
+           2018-06-06 - fs: Products missing
+          </remark>
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> ??? <remark
+           condition="clarity">2018-06-06 - fs: missing</remark>
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis>  ??? <remark
+           condition="clarity">2018-06-06 - fs: missing</remark>
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis>  ??? <remark
+           condition="clarity">2018-06-06 - fs: missing</remark>
+          </member>
+         </simplelist>
+        </entry>
+       </row>
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">SUSE Package Hub</emphasis>
+         </para>
+         <para>
+          Packages maintained by the &opensuse; community
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Basesystem
+         </para>
+        </entry>
+        <entry>
+         <para>
+          <remark condition="clarity">
+           2018-06-06 - fs: Products missing
+          </remark>
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> none
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis> none
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis> none
+          </member>
+         </simplelist>
+        </entry>
+       </row>
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">Web and Scripting</emphasis>
+         </para>
+         <para>
+          Packages intended for a running Web server
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Basesystem, Server Applications
+         </para>
+        </entry>
+        <entry>
+         <para>
+          <remark condition="clarity">
+           2018-06-06 - fs: Products missing
+          </remark>
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> ??? <remark
+           condition="clarity">2018-06-06 - fs: missing</remark>
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis>  ??? <remark
+           condition="clarity">2018-06-06 - fs: missing</remark>
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis> L3
+          </member>
+         </simplelist>
+        </entry>
+       </row>
+      </tbody>
+     </tgroup>
+    </informaltable>
+    <simplelist>
+     <member>
+      <superscript>1</superscript> ESPOS: Extended Service Pack Overlay Support
+     </member>
+     <member>
+      <superscript>2</superscript> LTSS: Long-Term Service Pack Support
+     </member>
+    </simplelist>
+  </sect2>
+
+<!--
+       <row>
+        <entry>
+         <para>
+          <emphasis role="bold">Workstation Extension</emphasis>
+         </para>
+         <para>
+          Office tools and multimedia
+         </para>
+        </entry>
+        <entry>
+         <para>
+          Base System, Desktop Applications
+         </para>
+        </entry>
+        <entry>
+         <para>
+          SLED, SLE-WE
+         </para>
+        </entry>
+        <entry>
+         <simplelist>
+          <member>
+           <emphasis role="bold">life cycle:</emphasis> 10 years
+          </member>
+          <member>
+           <emphasis role="bold">additional:</emphasis> no
+          </member>
+          <member>
+           <emphasis role="bold">support level:</emphasis> mixed L2/L3
+           (depending on package)
+          </member>
+         </simplelist>
+        </entry>
+        </row>
+-->
+
+
  </sect1>
  <xi:include href="common_copyright_quick.xml"/>
  <xi:include href="common_gfdl1.2_i.xml"/>
