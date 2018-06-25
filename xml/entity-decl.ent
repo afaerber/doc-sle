@@ -389,7 +389,8 @@
        <listitem>
         <para>
          Contains compilers (including <package>gcc</package>) and libraries
-         required for compiling and debugging applications.
+         required for compiling and debugging applications. Replaces the former
+	 Software Development Kit (SDK).
         </para>
         <para>
          <emphasis>Dependencies:</emphasis> Basesystem, Desktop Applications
@@ -403,7 +404,7 @@
          Contains packages that were available in previous versions of
          &productname;, but have been discontinued in &slsa;
          &productnumber;. This module is recommended when migrating from a
-         previous &slsa; version.
+         previous product version.
         </para>
         <para>
          <emphasis>Dependencies:</emphasis> Basesystem, Server Applications
