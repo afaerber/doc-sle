@@ -44,7 +44,7 @@
     <listitem>
      <para>
       Modules are components which allow you to shape the product according to
-      your needs. ach module has a clearly defined scope ranging from tools for
+      your needs. Each module has a clearly defined scope ranging from tools for
       Web Development and Scripting, through a Public Cloud, all the way to the
       SUSE Package Hub, offering community-managed packages. They give you the
       ability to provide just the set of packages that is required for the
@@ -66,7 +66,7 @@
       Modules are part of your &productname; subscription and therefore free of
       charge. They differ from the base of SUSE Linux Enterprise Server only by
       their life cycle. With the exception of the SUSE Package Hub module,
-      &suse; provides L3 support for almost all packages rovided by modules
+      &suse; provides L3 support for almost all packages provided by modules
       (refer to the <link
       xlink:href="https://www.suse.com/releasenotes/x86_64/SUSE-SLES/15/#Intro.Support">Release
       Notes</link>.
@@ -261,7 +261,7 @@
          Adds a graphical user interface <phrase os="sled">(Wayland)</phrase>
          and essential desktop applications to the system.
          <phrase os="sled">This module is selected for installation by
-         default; deselcting it is not recommended.</phrase>
+         default; deselecting it is not recommended.</phrase>
         </para>
        </entry>
       </row>
@@ -555,7 +555,7 @@
         <para>
          Adds server functionality by providing network services such as DHCP
          server, name server, or Web server. <phrase os="sles">This module is
-         selected for installation by default; deselcting it is not
+         selected for installation by default; deselecting it is not
          recommended.</phrase>
         </para>
        </entry>
@@ -886,7 +886,7 @@
     Modules &amp; extensions can easily be installed when setting up the
     system. The respective steps are part of the installation
     routine. Following the default installation path, this requires network
-    acces to contact the &scc; or a local registration server, which provide
+    access to contact the &scc; or a local registration server, which provide
     the respective repositories. An offline installation is supported, too. In
     that case an additional installation media is required. For detailed
     information refer to <xref linkend="sec.yast_install.modules"/>.
@@ -899,7 +899,7 @@
    <para>
     To install modules &amp; extensions from the running system, you need to
     make sure your system is registered with the &scc; or a local registration
-    server. If you have not done so during the installation, refor to <xref
+    server. If you have not done so during the installation, refer to <xref
     linkend="sec.register_sle.system"/> for instructions.
    </para>
    <para>
@@ -909,6 +909,140 @@
    </para>
   </sect2>
  </sect1>
+
+ <sect1 xml:id="sec.modules.find">
+  <title>Module Membership of Packages</title>
+  <para>
+   The default tools for searching software packages (&yast; Software
+   Management or <command>zypper search</command>) are restricted to searching
+   within active repositories. As a consequence, packages that are members of
+   modules currently not installed on &productname; are not found.
+  </para>
+  <para>
+   &productname; 15 introduces a new Zypper subcommand,
+   <command>search-packages</command>, which lets you search for packages in
+   all modules and extensions available for &productname;. To find out which
+   module a package belongs to, run
+  </para>
+  <screen>zypper search-packages <replaceable>PACKAGE_1</replaceable> <replaceable>PACKAGE_2</replaceable></screen>
+  <para>
+   To refine the search results, <command>zypper search-packages</command>
+   offers the following options:
+  </para>
+  <variablelist>
+   <varlistentry>
+    <term>
+     <option>-x</option>, <option>--match-exact</option>
+    </term>
+    <listitem>
+     <para>
+      Search for exact matches.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term>
+     <option>-g</option>, <option>--group-by-module</option>
+    </term>
+    <listitem>
+     <para>
+      Group the search results by modules rather than by package name.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term>
+     <option>-d</option>, <option>--details</option>
+    </term>
+    <listitem>
+     <para>
+      Additionally lists version numbers and repositories containing the
+      package.
+     </para>
+    </listitem>
+   </varlistentry>
+   <varlistentry>
+    <term><option>--xmlout</option></term>
+    <listitem>
+     <para>
+      Generate XML output.
+     </para>
+    </listitem>
+   </varlistentry>
+  </variablelist>
+  <para>
+   The following shows a few examples on how to use <command>zypper
+   search-packages</command>.
+  </para>
+  <example xml:id="ex.modules.find.simple">
+   <title>Simple Search</title>
+   <para>
+    The following command searches for the packages <package>nodejs</package>
+    and <package>hawk</package>. The first one is available in the <literal>Web
+    and Scripting</literal> module, while the second one is part of the &sle;
+    &hasi; Extension. Both packages are not yet installed:
+   </para>
+   <screen><?dbsuse-fo font-size="0.70em"?>&prompt.user;zypper search-packages hawk2 nodejs
+Following packages were found in following modules:
+
+Package        Module or Repository
+-------------  --------------------------------------------------------------------
+hawk2          SUSE Linux Enterprise High Availability Extension (sle-ha/15/x86_64)
+nodejs8        Web and Scripting Module (sle-module-web-scripting/15/x86_64)
+nodejs8-devel  Web and Scripting Module (sle-module-web-scripting/15/x86_64)
+nodejs8-docs   Web and Scripting Module (sle-module-web-scripting/15/x86_64)
+nodejs-common  Web and Scripting Module (sle-module-web-scripting/15/x86_64)
+
+To activate the respective module or product, use SUSEConnect --product.
+Use SUSEConnect --help for more details.</screen>
+  </example>
+  <example xml:id="ex.modules.find.exact">
+   <title>Searching for Exact Matches</title>
+   <para>
+    If you know the exact package names, you can narrow the results down to
+    exact matches by using the option <option>-x</option>:
+   </para>
+   <screen><?dbsuse-fo font-size="0.70em"?>&prompt.user;zypper search-packages -x hawk2 nodejs8
+Following packages were found in following modules:
+
+Package  Module or Repository
+-------  --------------------------------------------------------------------
+hawk2    SUSE Linux Enterprise High Availability Extension (sle-ha/15/x86_64)
+nodejs8  Web and Scripting Module (sle-module-web-scripting/15/x86_64)
+
+To activate the respective module or product, use SUSEConnect --product.
+Use SUSEConnect --help for more details.</screen>
+  </example>
+  <example xml:id="ex.modules.find.installed">
+   <title>
+    Searching for Packages That Are Already Installed or Available
+   </title>
+   <para>
+    If you search for packages that are already installed or are available in
+    one of the modules that are available on your system, the search results
+    differ. In the following example, the package <package>vim</package> is
+    already installed. The package <package>emacs</package> is not installed,
+    but is available for installation without having to add a module.
+   </para>
+   <screen>&prompt.user;zypper search-packages -x vim
+Following packages were found in following modules:
+
+Package  Module or Repository
+-------  ---------------------------------------------------
+vim      Basesystem Module (sle-module-basesystem/15/x86_64)
+vim      Installed
+vim      Available
+
+&prompt.user;zypper search-packages -x emacs
+Following packages were found in following modules:
+
+Package  Module or Repository
+-------  ---------------------------------------------------
+emacs    Basesystem Module (sle-module-basesystem/15/x86_64)
+emacs    Available</screen>
+  </example>
+ </sect1>
+
 
  <xi:include href="common_copyright_quick.xml"/>
  <xi:include href="common_gfdl1.2_i.xml"/>
