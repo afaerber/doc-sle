@@ -30,9 +30,9 @@
   <title>Modules &amp; Extensions Explained</title>
   <para>
    Starting with &productname; 15, the installation medium only consists of the
-   &leanos;, a minimal, command line-based system for installing, updating and
-   registering &productname;. During the installation you can add functionality
-   by selecting modules and extensions to be installed on top of the &leanos;.
+   &leanos;, a minimal system for installing, updating and registering
+   &productname;. During the installation you can add functionality by
+   selecting modules and extensions to be installed on top of the &leanos;.
   </para>
   <para>
    Technically modules and extensions are handled similarly, they differ
@@ -77,10 +77,10 @@
     <term>Extensions</term>
     <listitem>
      <para>
-      Extensions provide advanced capabilities for tasks such as real time
-      computing and high availability clustering to &productname;. They are
-      offered as subscriptions and require a registration key that is liable
-      for costs. Usually, extensions have their own release notes documents that
+      Extensions provide advanced capabilities for tasks such as live patching
+      and high availability clustering to &productname;. They are offered as
+      subscriptions and require a registration key that is liable for
+      costs. Usually, extensions have their own release notes documents that
       are available from <link
       xlink:href="https://www.suse.com/releasenotes"/>.^
      </para>
@@ -110,12 +110,12 @@
        </entry>
        <entry>
         <para>
-         Dependency
+         Module depends on
         </para>
        </entry>
        <entry>
         <para>
-         Availability
+         Available for
         </para>
        </entry>
        <entry>
@@ -309,9 +309,6 @@
        <entry morerows="1">
         <para>
          <emphasis role="bold">High Availability</emphasis>
-         <remark condition="clarity">
-          2018-06-06 - fs: Is this really a module?
-         </remark>
         </para>
        </entry>
        <entry>
@@ -321,9 +318,7 @@
        </entry>
        <entry>
         <para>
-         <remark condition="clarity">
-          2018-06-06 - fs: Products are missing
-         </remark>
+          SLES for SAP, SLE HPC
         </para>
        </entry>
        <entry>
@@ -345,7 +340,10 @@
        <entry namest="dependency" nameend="support">
         <para>
          Adds clustering support for mission critical setups. Tools included
-         are Hawk, crm, Pacemaker, and Corosync.
+         are Hawk, crm, Pacemaker, and Corosync. High Availability support is
+         included in subscriptions for SLES for SAP and SLE HPC and therefore
+         available as a module on these products. It is also available as an
+         extension for SLES (see below).
         </para>
        </entry>
       </row>
@@ -403,9 +401,7 @@
        </entry>
        <entry>
         <para>
-         <remark condition="clarity">
-          2018-06-06 - fs: Products are missing
-         </remark>
+         SLES, SLES for SAP, SLE HPC
         </para>
        </entry>
        <entry>
@@ -573,9 +569,7 @@
        </entry>
        <entry>
         <para>
-         <remark condition="clarity">
-          2018-06-06 - fs: Products missing
-         </remark>
+         SLED, SLES, SLES for SAP
         </para>
        </entry>
        <entry>
@@ -616,9 +610,7 @@
        </entry>
        <entry>
         <para>
-         <remark condition="clarity">
-          2018-06-06 - fs: Products missing
-         </remark>
+         all products
         </para>
        </entry>
        <entry>
@@ -660,9 +652,7 @@
        </entry>
        <entry>
         <para>
-         <remark condition="clarity">
-          2018-06-06 - fs: Products missing
-         </remark>
+         SLES, SlES for SAP, SLE HPC
         </para>
        </entry>
        <entry>
@@ -693,7 +683,7 @@
    </informaltable>
    <simplelist>
     <member>
-     <superscript>1</superscript> LTSS: Long-Term Service Pack Support
+     <superscript>1</superscript> LTSS: <link xlink:href="https://www.suse.com/products/long-term-service-pack-support/">Long-Term Service Pack Support</link>
     </member>
     <member>
      <superscript>2</superscript> ESPOS: Extended Service Pack Overlay Support
@@ -785,7 +775,7 @@
        </entry>
        <entry>
         <para>
-         SLES, ???
+         SLES
         </para>
        </entry>
       </row>
@@ -800,25 +790,6 @@
        <entry>
         <para>
          Basesystem
-        </para>
-       </entry>
-       <entry>
-        <para>
-         SLES, ???
-        </para>
-       </entry>
-      </row>
-      <row>
-       <entry>
-        <para>
-         <link
-           xlink:href="https://www.suse.com/products/suse-enterprise-storage/">&suse;
-         Enterprise Storage</link>
-        </para>
-       </entry>
-       <entry>
-        <para>
-         Basesystem, Server Applications
         </para>
        </entry>
        <entry>
@@ -886,10 +857,12 @@
     Modules &amp; extensions can easily be installed when setting up the
     system. The respective steps are part of the installation
     routine. Following the default installation path, this requires network
-    access to contact the &scc; or a local registration server, which provide
-    the respective repositories. An offline installation is supported, too. In
-    that case an additional installation media is required. For detailed
-    information refer to <xref linkend="sec.yast_install.modules"/>.
+    access to contact the &scc; or a local registration server (<link
+    xlink:href="https://www.suse.com/products/suse-manager/">&susemgr;</link>
+    or &rmtool;), which provide the respective repositories. An offline
+    installation is supported, too. In that case an additional installation
+    media is required. For detailed information refer to <xref
+    linkend="sec.yast_install.modules"/>.
    </para>
   </sect2>
   <sect2 xml:id="sec.modules.installing.system">
@@ -921,8 +894,10 @@
   <para>
    &productname; 15 introduces a new Zypper subcommand,
    <command>search-packages</command>, which lets you search for packages in
-   all modules and extensions available for &productname;. To find out which
-   module a package belongs to, run
+   all modules and extensions available for &productname;. This command becomes
+   available after installing the package
+   <package>zypper-search-packages-plugin</package>, which is not installed by
+   default. To find out which module a package belongs to, run
   </para>
   <screen>zypper search-packages <replaceable>PACKAGE_1</replaceable> <replaceable>PACKAGE_2</replaceable></screen>
   <para>
