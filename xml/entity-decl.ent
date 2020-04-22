@@ -107,7 +107,7 @@
 <!ENTITY intel64       "Intel&nbsp;64">
 <!ENTITY x86-64        "&amd64;/&intel64;">
 <!ENTITY arm           "Arm">
-<!ENTITY armreg        "Arm*">
+<!ENTITY armreg        "&arm;*">
 <!ENTITY armv7         "Armv7">
 <!ENTITY armv8         "Armv8">
 <!ENTITY aarch64       "AArch64">
